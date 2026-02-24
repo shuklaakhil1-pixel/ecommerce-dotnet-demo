@@ -1,0 +1,18 @@
+@page
+@model EcommerceDemo.Pages.IndexModel
+
+<h2>Product Search</h2>
+
+<form method="get">
+    <input type="text" name="SearchTerm" placeholder="Search product..." />
+    <button type="submit">Search</button>
+</form>
+
+<hr />
+
+<ul>
+@foreach (var product in Model.Products)
+{
+    <li>@product</li>
+}
+</ul>

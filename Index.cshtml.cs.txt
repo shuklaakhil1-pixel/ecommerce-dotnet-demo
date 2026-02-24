@@ -1,0 +1,36 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+
+namespace EcommerceDemo.Pages;
+
+public class IndexModel : PageModel
+{
+    [BindProperty(SupportsGet = true)]
+    public string? SearchTerm { get; set; }
+
+    public List<string> Products { get; set; } = new();
+
+    public void OnGet()
+    {
+        var allProducts = new List<string>
+        {
+            "Laptop",
+            "Smartphone",
+            "Headphones",
+            "Shoes",
+            "Watch",
+            "Camera"
+        };
+
+        if (!string.IsNullOrEmpty(SearchTerm))
+        {
+            Products = allProducts
+                .Where(p => p.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+        else
+        {
+            Products = allProducts;
+        }
+    }
+}
